@@ -649,6 +649,18 @@ esp_err_t uart_enable_pattern_det_intr(uart_port_t uart_num, char pattern_chr, u
  */
 esp_err_t uart_set_rs485_hd_mode(uart_port_t uart_num, bool enable);
 
+/**
+ * @brief   UART set the minimum pause interval between data frames
+ *
+ * @param uart_num UART port number.
+ * @param tx_idle Pause duration between two consecutive packets (0 - 1023)
+ *
+ * @return
+ *     - ESP_OK Success
+ *     - ESP_FAIL Parameter error
+ */
+esp_err_t uart_set_tx_idle(uart_port_t uart_num, int tx_idle);
+
 
 /***************************EXAMPLE**********************************
  *

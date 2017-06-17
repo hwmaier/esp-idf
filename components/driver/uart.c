@@ -1113,3 +1113,13 @@ esp_err_t uart_set_rs485_hd_mode(uart_port_t uart_num, bool enable)
     return ESP_OK;
 }
 
+esp_err_t uart_set_tx_idle(uart_port_t uart_num, int tx_idle)
+{
+    UART_CHECK((uart_num < UART_NUM_MAX), "uart_num error", ESP_FAIL);
+    UART_CHECK((tx_idle >= 0 && tx_idle < 1024), "tx_idle error", (-1));
+    UART_ENTER_CRITICAL(&uart_spinlock[uart_num]);
+    UART[uart_num]->idle_conf.tx_idle_num = tx_idle;
+    UART_EXIT_CRITICAL(&uart_spinlock[uart_num]);
+    return ESP_OK;
+}
+
