@@ -630,7 +630,10 @@ static void uart_rx_intr_handler_default(void *param)
                     UART_ENTER_CRITICAL_ISR(&uart_spinlock[uart_num]);
                     p_uart->rx_buffered_len += p_uart->rx_stash_len;
                     UART_EXIT_CRITICAL_ISR(&uart_spinlock[uart_num]);
-                    uart_event.type = UART_DATA;
+                    if(uart_intr_status & UART_RXFIFO_TOUT_INT_ST_M)
+                        uart_event.type = UART_SILENCE;
+                    else
+                        uart_event.type = UART_DATA;
                 }
                 if(HPTaskAwoken == pdTRUE) {
                     portYIELD_FROM_ISR() ;

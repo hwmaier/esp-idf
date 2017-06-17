@@ -130,6 +130,7 @@ typedef enum {
     UART_PARITY_ERR,        /*!< UART RX parity event*/
     UART_DATA_BREAK,        /*!< UART TX data and break event*/
     UART_PATTERN_DET,       /*!< UART pattern detected */
+    UART_SILENCE,           /*!< UART silence interval detected */
     UART_EVENT_MAX,         /*!< UART event max index*/
 } uart_event_type_t;
 
